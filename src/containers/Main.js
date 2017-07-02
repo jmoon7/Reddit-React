@@ -6,15 +6,6 @@ import PostGrid from './PostGrid'
 import PostView from './PostView'
 import { fetchFromReddit } from '../utils'
 
-/* 
- * TODO: 
- *		- dynamically render 'post' boxes by listening the browser width/height
- *		- blocks (small image previews) vs cards (facebook-ish big blocks)  
- *				 suggestion: default mobile view -> cards
- *		- size of the blocks based on karma?
- *		- 100 blocks (108x54). The hovered block animates to takes up 4 block spaces, other blocks rearrange themselves
- */
-
 class Main extends Component {
 	constructor(props) {
 		super(props);
@@ -29,9 +20,6 @@ class Main extends Component {
 		}
 	}
 
-	/* TODO: use fetchFromReddit from utils.js
-	 * 		 response.ok else case, add catch
-	 */
 	fetchPosts() {
 		let fetchURL = `https://www.reddit.com/r/${this.state.subreddit}/.json?limit=${this.state.numPosts}`;
 		fetchFromReddit('posts', fetchURL).then(response => {

@@ -1,6 +1,5 @@
 
 # Reddit React
-by Jung Woo Moon.
 
 [See it in action](http://reddit-react.s3-website-us-west-2.amazonaws.com/).
 
@@ -29,8 +28,11 @@ Features:
 
     - Display full comments tree
     - More posts (infinite scrolling / next button)
+    - Support Youtube videos
+    - Login/Signup?
     - Make title more visible on block hover (white backgrounds)
     - Show Loading...
+    - Mobile support
 
 Bugs:
 

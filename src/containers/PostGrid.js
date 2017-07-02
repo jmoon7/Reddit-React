@@ -6,8 +6,6 @@ class PostGrid extends Component {
 
 	render() {
 		let { posts, nsfw } = this.props;
-		// const length = posts.length;
-
 		posts = posts.map((post, i) => {
 			return <Block key={i} post={post} nsfw={nsfw} handleClick={this.props.handleClick} />
 		});

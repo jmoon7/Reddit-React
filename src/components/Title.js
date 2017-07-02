@@ -1,5 +1,4 @@
 import React from 'react'
-// import logo from '../resources/logo.png'
 import logo from '../resources/reddit.svg'
 
 const Title = () => {
