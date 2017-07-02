@@ -6,13 +6,9 @@ class PostGrid extends Component {
 
 	render() {
 		let { posts, nsfw, device } = this.props;
-		
-		let width = (device === 'mobile') ? '100%' : '200px';
-		let height = (device === 'mobile') ? '200px' : '100px';
-		let margin = (device === 'mobile') ? '0' : '5px';
 
 		posts = posts.map((post, i) => {
-			return <Block key={i} post={post} nsfw={nsfw} handleClick={this.props.handleClick} width={width} height={height} margin={margin}/>
+			return <Block key={i} post={post} nsfw={nsfw} handleClick={this.props.handleClick} device={device}/>
 		});
 		
 		return <div style={gridStyle}> { posts } </div>;

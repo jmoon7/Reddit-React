@@ -10,7 +10,7 @@ class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			width: 0,
+			device: 'desktop',
 			subreddit: 'all',
 			posts: [],
 			searchSuggestions: [],
@@ -31,7 +31,11 @@ class Main extends Component {
 	}
 
 	setDimensions() {
-		this.setState({ width: getDimensions()[0] })
+		if (getDimensions()[0] < 700) {
+			this.setState({ device: 'mobile' });
+		} else {
+			this.setState({ device: 'desktop' });
+		}
 	}
 
 	handleNSFWClick() {
@@ -81,11 +85,9 @@ class Main extends Component {
 	}
 	
 	render() {
-		let device = 'desktop';
-		if (this.state.width < 700) {
-			device = 'mobile';
-		} else {
-		}
+		let device = this.state.device;
+		const bannerStyle = (device !== 'mobile') ? { height: '24%'} : { height: '15%'};
+		const postStyle = (device !== 'mobile') ? { height: '76%'} : { height: '85%'};
 
 		const posts = this.state.posts.slice(0, this.state.numPosts);
 
@@ -121,18 +123,10 @@ let divStyle = {
 	width: '100%',
 	height: '100%'
 }
-
 const headerStyle = {
 	padding: '5px',
-	height: '2%',
 }
 const centerStyle = {
 	textAlign: 'center',
 	height: '98%'
-}
-const bannerStyle = {
-	height: '24%',
-}
-const postStyle = {
-	height: '76%'
 }

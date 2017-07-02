@@ -43,8 +43,8 @@ const emptyStyle = {
 }
 
 const commentStyle = {
-	borderBottom: '1px solid #dddddd',
-	paddingBottom: '10px', 
+	borderTop: '1px solid #dddddd',
+	paddingTop: '10px', 
 	fontSize: '13px',
 	margin: '10px'
 }

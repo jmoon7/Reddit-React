@@ -56,7 +56,11 @@ class Block extends Component {
 	}
 
 	render() {
-		const { post, nsfw, width, height, margin } = this.props;
+		const { post, nsfw, device } = this.props;
+
+		let width = (device === 'mobile') ? '100%' : '200px';
+		let height = (device === 'mobile') ? '200px' : '100px';
+		let margin = (device === 'mobile') ? '0' : '5px';
 		spanStyle = { ...spanStyle, width: width, height: height, margin: margin};
 
 		let imageLoad = 'imageLoading';
@@ -78,7 +82,7 @@ class Block extends Component {
 					nsfwShow={nsfw}
 					width={width}
 					height={height}
-					margin={margin}
+					device={device}
 				 />
 			</span>
 
@@ -90,9 +94,7 @@ Block.propTypes = {
 	post: PropTypes.object.isRequired,
 	nsfw: PropTypes.bool.isRequired,
 	handleClick: PropTypes.func.isRequired,
-	width: PropTypes.string.isRequired,
-	height: PropTypes.string.isRequired,
-	margin: PropTypes.string.isRequired
+	device: PropTypes.string.isRequired
 };
 
 export default Block

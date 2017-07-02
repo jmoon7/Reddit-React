@@ -5,13 +5,13 @@ import logoMobile from '../resources/logo.png';
 
 const Title = (props) => {
 	let logo, title;
-	// if (props.device === 'mobile') {
-		// logo = <img src={logoMobile} alt='Reddit' height='20'/>;
-		// title = ' reddit react';
-	// } else {
+	if (props.device === 'mobile') {
+		logo = <img src={logoMobile} alt='Reddit' height='25'/>;
+		title = ' reddit react';
+	} else {
 		logo = <img src={logoBig} alt='Reddit' height='70'/>;
 		title = 'react'
-	// }
+	}
 	return (
 		<div style={style}>
 			{logo}
@@ -28,6 +28,6 @@ export default Title
 
 
 let style = {
-	'fontSize': '20px',
+	'fontSize': '25px',
 	'fontFamily': 'Vag'
 }

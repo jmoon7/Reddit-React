@@ -34,7 +34,7 @@ class PostView extends Component {
 
 	render() {
 		if (this.props.device === 'desktop') {
-			divStyle = { ...divStyle, width: '80%' };
+			divStyle = { ...divStyle, width: '85%' };
 		} else {
 			divStyle = { ...divStyle, width: '100%' };
 		}

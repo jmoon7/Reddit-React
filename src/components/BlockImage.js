@@ -2,21 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const BlockImage = (props) => {
-	const { src, className, hover, title, nsfw, nsfwShow, width, height } = props;
+	const { src, className, hover, title, nsfw, nsfwShow, width, height, device } = props;
 
+	let overlay, filter, opacity;
+	overlay = (hover || (device === 'mobile')) ? 'linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0))' : 'none';
+	filter = (nsfw && !nsfwShow) ? 'blur(10px)' : 'none';
+	opacity = hover || (src === '') || (device === 'mobile') ? '1' : '0';
+	const fontSize = (device === 'mobile') ? '20px' : '15px';
 
-	divStyle = { ...divStyle, backgroundImage: `url(${src})`, width: width, height: height }
-
-	let filter, opacity;
-	filter = (hover || (nsfw && !nsfwShow)) ? 'blur(5px)' : 'none'
-	opacity = hover || (src === '') ? '1' : '0'
-	divStyle = { ...divStyle, filter: filter};
-	titleStyle = { ...titleStyle, opacity: opacity};
-
+	divStyle = { ...divStyle, backgroundImage: `url(${src})`, width: width, height: height, filter: filter };
+	overlayStyle = { ...overlayStyle, width: width, height: height, background: overlay };
+	titleStyle = { ...titleStyle, opacity: opacity, fontSize: fontSize};
 
 
 	return (
 		<div>
+			<div style={overlayStyle}> </div>
 			<div className='blockTitle' style={titleStyle}> {title} </div>
 			<div className={className} style={divStyle}> </div>
 		</div>
@@ -31,15 +32,19 @@ BlockImage.propTypes = {
 	nsfw: PropTypes.bool.isRequired,
 	nsfwShow: PropTypes.bool.isRequired,
 	width: PropTypes.string.isRequired,
-	height: PropTypes.string.isRequired
+	height: PropTypes.string.isRequired,
+	device: PropTypes.string.isRequired
 };
 
 export default BlockImage
 
+let overlayStyle = {
+	position: 'absolute',
+	zIndex: '2'
+}
+
 let divStyle = {
 	zIndex: '1',
-	// height: '100px',
-	// width: '200px',
 	backgroundSize: 'cover',
 	backgroundRepeat: 'no-repeat',
 };

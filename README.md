@@ -30,15 +30,13 @@ Features:
     - More posts (infinite scrolling / next button)
     - Support Youtube videos
     - Login/Signup?
-    - Make title more visible on block hover (white backgrounds)
     - Show Loading...
-    - Change logo and position on header for mobile
 
 Bugs:
 
+    - subreddit suggestions broken on mobile
     - Scaling iframe in the Content container
     - Gilded sign at the end of the comment section
     - Search suggestions buggy if query change is faster than fetch time
-    - mobile header/main positioning (whitespace)
     - setState warnings
     - fix error handling
