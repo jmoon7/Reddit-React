@@ -1,3 +1,14 @@
+export const getDimensions = () => {
+    // Adapted from StackOverflow
+    let w, d, e, g, width, height;
+    w = window;
+    d = document;
+    e = d.documentElement;
+    g = d.getElementsByTagName('body')[0];
+    width = g.clientWidth ||  e.clientWidth || w.innerWidth;
+    height = g.clientHeight || e.clientHeight || w.innerHeight;
+    return [width, height];
+}
 
 export const decodeHTML = (input) => {
     let temp = document.createElement("textarea");

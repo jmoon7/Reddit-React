@@ -32,13 +32,13 @@ Features:
     - Login/Signup?
     - Make title more visible on block hover (white backgrounds)
     - Show Loading...
-    - Mobile support
+    - Change logo and position on header for mobile
 
 Bugs:
 
     - Scaling iframe in the Content container
     - Gilded sign at the end of the comment section
-    - Back button positioning
     - Search suggestions buggy if query change is faster than fetch time
+    - mobile header/main positioning (whitespace)
     - setState warnings
     - fix error handling

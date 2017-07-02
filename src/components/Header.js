@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+	import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Header extends Component {
@@ -18,15 +18,9 @@ class Header extends Component {
 	render() {
 		let nsfwStyle;
 		if (this.props.nsfw) {
-			nsfwStyle = {
-				...inputStyle,
-				color: 'red'
-			}
+			nsfwStyle = { ...inputStyle, color: 'red' };
 		} else {
-			nsfwStyle = {
-				...inputStyle,
-				color: 'black'
-			}
+			nsfwStyle = { ...inputStyle, color: 'black' };
 		}
 
 		return (
@@ -51,5 +45,5 @@ const inputStyle = {
 	backgroundColor: 'transparent',
 	fontSize: '15px',
 	cursor: 'pointer',
-	outline: 'none'
+	outline: 'none'	
 }

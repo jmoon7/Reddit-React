@@ -28,14 +28,37 @@ class PostView extends Component {
 		this.fetchComments();
 	}
 
+	componentWillUnmount() {
+		this.setState({ comments: [] });
+	}
+
 	render() {
+		if (this.props.device === 'desktop') {
+			divStyle = { ...divStyle, width: '80%' };
+		} else {
+			divStyle = { ...divStyle, width: '100%' };
+		}
+
+		if (this.props.device === 'mobile') {
+			divStyle = { ...divStyle, overflowY: 'auto' };
+			contentStyle = { ...contentStyle, display: 'block', width: '100%', height: 'auto' };
+			commentsStyle = { ...commentsStyle, display: 'block', width: '100%', height: 'auto'};
+		} else {
+			divStyle = { ...divStyle, overflowY: 'hidden' };
+			contentStyle = { ...contentStyle, display: 'inline-block', width: '55%', 'height': '100%' };
+			commentsStyle = { ...commentsStyle, display: 'inline-block', width: '45%', 'height': '100%' };
+		}
+
 		const { post, handleBackClick } = this.props;
 
 		return (
 			<div style={divStyle}>
-				<button onClick={handleBackClick} style={buttonStyle} className='backButton'> &#9587; </button>
-				<Content post={post}/>
-				<Comments comments={this.state.comments}/>			
+				<div style={contentStyle}>
+					<Content post={post} handleBackClick={handleBackClick}/>
+				</div>
+				<div style={commentsStyle}>
+					<Comments comments={this.state.comments}/>
+				</div>			
 			</div>
 		)
 	}
@@ -43,27 +66,29 @@ class PostView extends Component {
 
 PostView.propTypes = {
 	post: PropTypes.object.isRequired,
-	handleBackClick: PropTypes.func.isRequired
+	handleBackClick: PropTypes.func.isRequired,
+	device: PropTypes.string.isRequired
 };
 
 export default PostView
 
-const buttonStyle = {
-	position: 'absolute',
-	// hmmmm hacky
-	top: '28%',
-	left: '13%',
-	borderRadius: '20px',
-	border: 'none',
-	cursor: 'pointer'
-}
-
-const divStyle = {
+let divStyle = {
 	display: 'inline-block',
 	border: '2px solid #dddddd',
-	width: '75%',
-	height: '90%',
-	margin: '0 auto'
+	margin: '0 auto',
+	height: '98%'
+}
+
+let contentStyle = {
+	display: 'inline-block',
+	overflowY: 'auto'
+}
+
+let commentsStyle = {
+	display: 'inline-block',
+	overflowY: 'auto',
+	overflowX: 'hidden',
+	textAlign: 'left',
 }
 
 

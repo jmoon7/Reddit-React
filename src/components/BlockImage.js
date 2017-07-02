@@ -2,15 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const BlockImage = (props) => {
-	const { src, className, hover, title, /*score,*/ nsfw, nsfwShow } = props;
+	const { src, className, hover, title, nsfw, nsfwShow, width, height } = props;
 
-	divStyle = { ...divStyle, backgroundImage: `url(${src})` }
+
+	divStyle = { ...divStyle, backgroundImage: `url(${src})`, width: width, height: height }
 
 	let filter, opacity;
 	filter = (hover || (nsfw && !nsfwShow)) ? 'blur(5px)' : 'none'
 	opacity = hover || (src === '') ? '1' : '0'
 	divStyle = { ...divStyle, filter: filter};
 	titleStyle = { ...titleStyle, opacity: opacity};
+
+
 
 	return (
 		<div>
@@ -25,19 +28,20 @@ BlockImage.propTypes = {
 	className: PropTypes.string.isRequired,
 	hover: PropTypes.bool.isRequired,
 	title: PropTypes.string.isRequired,
-	score: PropTypes.number.isRequired,
 	nsfw: PropTypes.bool.isRequired,
-	nsfwShow: PropTypes.bool.isRequired
+	nsfwShow: PropTypes.bool.isRequired,
+	width: PropTypes.string.isRequired,
+	height: PropTypes.string.isRequired
 };
 
 export default BlockImage
 
 let divStyle = {
 	zIndex: '1',
-	height: '100px',
-	width: '200px',
+	// height: '100px',
+	// width: '200px',
 	backgroundSize: 'cover',
-	backgroundRepeat: 'no-repeat'
+	backgroundRepeat: 'no-repeat',
 };
 
 let titleStyle = {

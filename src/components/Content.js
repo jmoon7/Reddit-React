@@ -4,7 +4,7 @@ import { decodeHTML, roundToThousand } from '../utils';
 import showdown from 'showdown';
 
 const Content = (props) => {
-	const post = props.post;
+	const {post, handleBackClick} = props;
 	let media;
 	try {
 		// TODO: youtube videos?
@@ -15,7 +15,6 @@ const Content = (props) => {
 				src = src.variants.gif.source.url;
 				media = <iframe src={src} style={iframeStyle} title="media" scrolling="no"></iframe>
 			} else {
-				console.log("imagessss")
 				src = decodeHTML(src.source.url);
 				media = <img style={imgStyle} src={src} alt='media'/>;
 			}
@@ -27,8 +26,9 @@ const Content = (props) => {
 	let body = new showdown.Converter().makeHtml(post.selftext);
 	body = { __html: body}
 	return (
-		<div style={contentStyle}>
+		<div>
 			<div style={infoStyle}>
+				<button onClick={handleBackClick} style={buttonStyle} className='backButton'> &#9587; </button>
 				<span style={scoreStyle}> {roundToThousand(post.score)} </span>
 				<span style={spanStyle}> {'/r/' + post.subreddit} </span> 
 				<span style={spanStyle}> <a href={post.url}> link </a> </span>
@@ -46,71 +46,71 @@ const Content = (props) => {
 }
 
 Content.propTypes = {
-	post: PropTypes.object.isRequired
+	post: PropTypes.object.isRequired,
+	handleBackClick: PropTypes.func.isRequired
 };
 
 export default Content
 
-const contentStyle = {
-	display: 'inline-block',
-	overflowY: 'scroll',
-	height: '100%',
-	width: '55%',	
+const imgStyle = {
+	height: 'auto', 
+    width: 'auto',
+    maxWidth: '90%',
+	margin: 'auto'
 }
 
-	const imgStyle = {
-		height: 'auto', 
-	    width: 'auto',
-	    maxWidth: '90%',
-		margin: 'auto'
+const iframeStyle = {
+	margin: '0',
+	padding: '0',
+	height: '500px',
+	width: '500px',
+    border: 'none'
+}
+
+const titleStyle = {
+	margin: '20px',
+	fontSize: '25px'
+}
+
+const infoStyle = {
+	margin: '10px',
+	fontSize: '13px'
+}
+
+	const buttonStyle = {
+		borderRadius: '20px',
+		border: 'none',
+		cursor: 'pointer'
 	}
 
-	const iframeStyle = {
-		margin: '0',
-		padding: '0',
-		height: '500px',
-		width: '500px',
-	    border: 'none'
+	const scoreStyle = {
+		backgroundColor: '#ff7221',
+		color: 'white',
+		borderRadius: '15px',
+		padding: '3px',
+		margin: '10px'
 	}
 
-	const titleStyle = {
-		margin: '20px',
-		fontSize: '25px'
+	const spanStyle = {
+		color: 'grey',
+		margin: '10px'
 	}
 
-	const infoStyle = {
-		margin: '10px',
-		fontSize: '13px'
+	const gildStyle = {
+		backgroundColor: 'yellow',
+		color: 'orange',
+		padding: '2px',
+		borderRadius: '10px',
+		margin: '10px'
 	}
 
-		const scoreStyle = {
-			backgroundColor: '#ff7221',
-			color: 'white',
-			borderRadius: '15px',
-			padding: '3px',
-			margin: '10px'
-		}
-
-		const spanStyle = {
-			color: 'grey',
-			margin: '10px'
-		}
-
-		const gildStyle = {
-			backgroundColor: 'yellow',
-			color: 'orange',
-			padding: '2px',
-			borderRadius: '10px',
-			margin: '10px'
-		}
-
-		const nsfwStyle = {
-			color: 'red',
-			margin: '10px'
-		}
-
-	const bodyStyle = {
-		fontSize: '15px',
-		margin: '20px'
+	const nsfwStyle = {
+		color: 'red',
+		margin: '10px'
 	}
+
+const bodyStyle = {
+	fontSize: '15px',
+	margin: '20px'
+}
 

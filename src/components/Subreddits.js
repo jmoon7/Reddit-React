@@ -7,7 +7,7 @@ class Subreddits extends Component {
 
 	constructor(props) {
 		super(props);
-		this.popularSubreddits = ['all', 'funny', 'pics', 'IAmA', 'gaming', 'videos', 'movies', 'earthporn', 'wallpapers', 'todayilearned', 'science', ];
+		this.popularSubreddits = ['all', 'funny', 'pics', 'IAmA', 'gaming', 'videos', 'movies', 'earthporn', 'todayilearned', 'science', ];
 	}
 
 	render() {
@@ -23,6 +23,11 @@ class Subreddits extends Component {
 				</button>
 			);
 		});
+		
+		if (this.props.device === 'mobile') {
+			subreddits = [];
+		}
+
 		return (
 			<div style={divStyle}> 
 				<div style={currentSubredditStyle}>
@@ -37,13 +42,14 @@ class Subreddits extends Component {
 
 Subreddits.propTypes = {
 	currentSubreddit: PropTypes.string.isRequired,
-	handleClick: PropTypes.func.isRequired
+	handleClick: PropTypes.func.isRequired,
+	device: PropTypes.string.isRequired
 };
 
 export default Subreddits
 
 
-const divStyle = {
+let divStyle = {
 	textAlign: 'center'
 }
 

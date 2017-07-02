@@ -56,12 +56,13 @@ class Block extends Component {
 	}
 
 	render() {
-		const { post, nsfw } = this.props;
+		const { post, nsfw, width, height, margin } = this.props;
+		spanStyle = { ...spanStyle, width: width, height: height, margin: margin};
+
 		let imageLoad = 'imageLoading';
 		if (this.state.imgLoaded) {
 			imageLoad += ' imageLoaded';			
 		}
-
 		return (
 			<span style={spanStyle} 
 				onMouseOver={this.handleMouseOver.bind(this)} 
@@ -73,11 +74,12 @@ class Block extends Component {
 					className={imageLoad} 
 					hover={this.state.hover}
 					title={this.trimTitle(post.title)}
-					score={post.score}
 					nsfw={post.over_18}
 					nsfwShow={nsfw}
+					width={width}
+					height={height}
+					margin={margin}
 				 />
-
 			</span>
 
 		)
@@ -87,11 +89,13 @@ class Block extends Component {
 Block.propTypes = {
 	post: PropTypes.object.isRequired,
 	nsfw: PropTypes.bool.isRequired,
-	handleClick: PropTypes.func.isRequired
+	handleClick: PropTypes.func.isRequired,
+	width: PropTypes.string.isRequired,
+	height: PropTypes.string.isRequired,
+	margin: PropTypes.string.isRequired
 };
 
 export default Block
-
 
 let spanStyle = {
 	position: 'relative',
@@ -99,6 +103,5 @@ let spanStyle = {
 	overflow: 'hidden',
 	backgroundColor: '#bbbbbb',
 	borderStyle: 'none',
-	margin: '5px',
 	cursor: 'pointer'
 };

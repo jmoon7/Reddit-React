@@ -4,12 +4,13 @@ import Title from '../components/Title'
 import Subreddits from '../components/Subreddits'
 import PostGrid from './PostGrid'
 import PostView from './PostView'
-import { fetchFromReddit } from '../utils'
+import { fetchFromReddit, getDimensions } from '../utils'
 
 class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			width: 0,
 			subreddit: 'all',
 			posts: [],
 			searchSuggestions: [],
@@ -27,6 +28,10 @@ class Main extends Component {
 				posts: response
 			});
 		});
+	}
+
+	setDimensions() {
+		this.setState({ width: getDimensions()[0] })
 	}
 
 	handleNSFWClick() {
@@ -60,7 +65,12 @@ class Main extends Component {
 		})
 	}
 
+	componentWillMount() {
+		this.setDimensions();
+	}
+
 	componentDidMount() {
+		window.addEventListener('resize', this.setDimensions.bind(this));
 		this.fetchPosts();
 	}
 
@@ -71,27 +81,33 @@ class Main extends Component {
 	}
 	
 	render() {
+		let device = 'desktop';
+		if (this.state.width < 700) {
+			device = 'mobile';
+		} else {
+		}
+
 		const posts = this.state.posts.slice(0, this.state.numPosts);
 
 		let toggleViewGrid;
 		if (this.state.postView) {
-			toggleViewGrid = <PostView post={this.state.postView} handleBackClick={this.handleBackClick.bind(this)} />;
+			toggleViewGrid = <PostView post={this.state.postView} handleBackClick={this.handleBackClick.bind(this)} device={device}/>;
 		} else {
-			toggleViewGrid = <PostGrid posts={posts} handleClick={this.handlePostClick.bind(this)} nsfw={this.state.nsfw} />;
+			toggleViewGrid = <PostGrid posts={posts} handleClick={this.handlePostClick.bind(this)} nsfw={this.state.nsfw} device={device}/>;
 		}
 		
 		return (
 			<div style={divStyle}>
-				<div style={headerStyle}>
-	    			<Header handleNSFWClick={this.handleNSFWClick.bind(this)} nsfw={this.state.nsfw} />
-				</div>
-				<div style={mainStyle}>
+			<div style={headerStyle}>
+	    		<Header handleNSFWClick={this.handleNSFWClick.bind(this)} nsfw={this.state.nsfw} />
+			</div>
+				<div style={centerStyle}>
 					<div style={bannerStyle}>
-						<Title />
-						<Subreddits currentSubreddit={this.state.subreddit} handleClick={this.handleSubredditClick.bind(this)} />
+						<Title device={device} />
+						<Subreddits currentSubreddit={this.state.subreddit} handleClick={this.handleSubredditClick.bind(this)} device={device} />
 					</div>
 					<div style={postStyle}>
-						{ toggleViewGrid }
+					{ toggleViewGrid }
 					</div>
 				</div>
 			</div>
@@ -101,24 +117,22 @@ class Main extends Component {
 
 export default Main
 
-const divStyle = {
+let divStyle = {
 	width: '100%',
 	height: '100%'
 }
 
 const headerStyle = {
 	padding: '5px',
+	height: '2%',
 }
-
-const mainStyle = {
+const centerStyle = {
 	textAlign: 'center',
-	height: '100%',
+	height: '98%'
 }
-
 const bannerStyle = {
-	height: '23.5%',
+	height: '24%',
 }
-
 const postStyle = {
-	height: '76.5%'	
+	height: '76%'
 }

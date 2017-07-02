@@ -9,7 +9,7 @@ const Comments = (props) => {
 		let body = new showdown.Converter().makeHtml(comment.body);
 		body = { __html: body}
 		return <div style={commentStyle} key={i}> 
-					<div style={authorStyle}> 
+					<div style={infoStyle}> 
 						{comment.author} {' '}
 						<span style={scoreStyle}>
 							{roundToThousand(comment.score)}
@@ -18,12 +18,12 @@ const Comments = (props) => {
 						{comment.gilded !== 0 ? <span style={gildStyle}> &#9733; {comment.gilded} </span> : null }
 					</div> 
 					{' '}
-					<div dangerouslySetInnerHTML={body}/> 
+					<div style={bodyStyle} dangerouslySetInnerHTML={body}/> 
 				</div> 
 	});
 	
 	return (
-		<div style={commentsStyle}>
+		<div>
 			{ (comments.length === 0) ? <div style={emptyStyle}> no comments </div> : comments }
 		</div>
 	);	
@@ -35,32 +35,23 @@ Comments.propTypes = {
 
 export default Comments
 
-const commentsStyle = {
-	display: 'inline-block',
-	overflowY: 'scroll',
-	overflowX: 'hidden',
-	height: '100%',
-	width: '45%',
-	textAlign: 'left',
+const emptyStyle = {
+	fontSize: '40px',
+	color: '#dddddd',
+	textAlign: 'center',
+	margin: 'auto'
 }
-	const emptyStyle = {
-		fontSize: '40px',
-		color: '#dddddd',
-		textAlign: 'center',
-		margin: 'auto'
+
+const commentStyle = {
+	borderBottom: '1px solid #dddddd',
+	paddingBottom: '10px', 
+	fontSize: '13px',
+	margin: '10px'
+}
+	const infoStyle = {
+		color: 'grey',
+		fontSize: '11px',
 	}
-	
-	const commentStyle = {
-		borderBottom: '1px solid #dddddd',
-		paddingBottom: '10px', 
-		fontSize: '13px',
-		margin: '10px'
-	}
-		const authorStyle = {
-			color: 'grey',
-			fontSize: '11px',
-			marginBottom: '2px'
-		}
 		const scoreStyle = {
 			color: '#ff7221'
 		}
@@ -78,3 +69,6 @@ const commentsStyle = {
 			borderRadius: '10px',
 			marginLeft: '5px'
 		}
+	const bodyStyle = {
+		margin: '0'
+	}
