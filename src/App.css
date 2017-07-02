@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+html, body, #root, #app {
+	font-family: 'Source Sans', sans-serif;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	margin: 0;
+}
+
+@font-face {
+	font-family: 'Vag';
+	src: url('./resources/Vag-round-light.ttf');
+}

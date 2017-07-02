@@ -1,0 +1,43 @@
+.imageLoading {
+	transform: translateY(10px);
+	opacity: 0;
+	transition: opacity 1.0s, transform 1.0s;
+}
+
+.imageLoaded {
+	transform: translateY(0px);
+	opacity: 1;
+}
+
+.suggestion {
+	padding: 5px;
+	background-color: white;
+	transition: background-color 0.3s;
+}
+
+.suggestion:hover {
+	background-color: orange;
+}
+
+.backButton {
+	background-color: #dddddd;
+	width: 30px;
+	height: 30px;
+	color: black;
+	transition: 0.3s;
+}
+
+.backButton:hover {
+	background-color: #ff7221;
+	color: white;
+	transform: rotate(180deg);
+}
+
+.subredditButton {
+	transform: translateY(0px);
+	transition: transform 0.2s;
+}
+
+.subredditButton:hover {
+	transform: translateY(-2px);
+}
