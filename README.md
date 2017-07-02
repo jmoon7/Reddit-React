@@ -35,6 +35,7 @@ Features:
 Bugs:
 
     - subreddit suggestions broken on mobile
+    - zooming broken
     - Scaling iframe in the Content container
     - Gilded sign at the end of the comment section
     - Search suggestions buggy if query change is faster than fetch time
