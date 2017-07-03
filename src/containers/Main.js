@@ -125,6 +125,7 @@ let divStyle = {
 }
 const headerStyle = {
 	padding: '5px',
+	height: '2%'
 }
 const centerStyle = {
 	textAlign: 'center',

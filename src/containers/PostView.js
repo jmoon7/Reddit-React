@@ -40,11 +40,11 @@ class PostView extends Component {
 		}
 
 		if (this.props.device === 'mobile') {
-			divStyle = { ...divStyle, overflowY: 'auto' };
+			divStyle = { ...divStyle, overflowY: 'auto', height: '100%' };
 			contentStyle = { ...contentStyle, display: 'block', width: '100%', height: 'auto' };
 			commentsStyle = { ...commentsStyle, display: 'block', width: '100%', height: 'auto'};
 		} else {
-			divStyle = { ...divStyle, overflowY: 'hidden' };
+			divStyle = { ...divStyle, overflowY: 'hidden', height: '96%' };
 			contentStyle = { ...contentStyle, display: 'inline-block', width: '55%', 'height': '100%' };
 			commentsStyle = { ...commentsStyle, display: 'inline-block', width: '45%', 'height': '100%' };
 		}
@@ -76,7 +76,6 @@ let divStyle = {
 	display: 'inline-block',
 	border: '2px solid #dddddd',
 	margin: '0 auto',
-	height: '98%'
 }
 
 let contentStyle = {
