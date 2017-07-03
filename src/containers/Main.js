@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Header from '../components/Header'
-import Title from '../components/Title'
 import Subreddits from '../components/Subreddits'
 import PostGrid from './PostGrid'
 import PostView from './PostView'
@@ -86,8 +85,8 @@ class Main extends Component {
 	
 	render() {
 		let device = this.state.device;
-		const bannerStyle = (device !== 'mobile') ? { height: '24%'} : { height: '15%'};
-		const postStyle = (device !== 'mobile') ? { height: '76%'} : { height: '85%'};
+		const headerStyle = (device !== 'mobile') ? { height: '22%'} : { height: '18%'};
+		postStyle = (device !== 'mobile') ? { ...postStyle, height: '78%'} : { ...postStyle, height: '82%'};
 
 		const posts = this.state.posts.slice(0, this.state.numPosts);
 
@@ -100,17 +99,14 @@ class Main extends Component {
 		
 		return (
 			<div style={divStyle}>
-			<div style={headerStyle}>
-	    		<Header handleNSFWClick={this.handleNSFWClick.bind(this)} nsfw={this.state.nsfw} />
-			</div>
-				<div style={centerStyle}>
+				<div style={headerStyle}>
+		    		<Header device={device} handleNSFWClick={this.handleNSFWClick.bind(this)} nsfw={this.state.nsfw} />
 					<div style={bannerStyle}>
-						<Title device={device} />
 						<Subreddits currentSubreddit={this.state.subreddit} handleClick={this.handleSubredditClick.bind(this)} device={device} />
 					</div>
-					<div style={postStyle}>
+				</div>
+				<div style={postStyle}>
 					{ toggleViewGrid }
-					</div>
 				</div>
 			</div>
 		)
@@ -121,13 +117,14 @@ export default Main
 
 let divStyle = {
 	width: '100%',
-	height: '100%'
+	height: '100%',
 }
 const headerStyle = {
-	padding: '5px',
-	height: '2%'
+	padding: '5px'
 }
-const centerStyle = {
-	textAlign: 'center',
-	height: '98%'
+const bannerStyle = {
+	textAlign: 'center'
 }
+let postStyle = {
+	textAlign: 'center' 
+};

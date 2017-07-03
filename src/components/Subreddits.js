@@ -27,9 +27,10 @@ class Subreddits extends Component {
 		if (this.props.device === 'mobile') {
 			subreddits = [];
 		}
-
+		console.log(this.props.currentSubreddit)
 		return (
 			<div style={divStyle}> 
+				<br/>
 				<div style={currentSubredditStyle}>
 					{ `/r/${this.props.currentSubreddit}` } 
 				</div>
@@ -66,6 +67,5 @@ const buttonStyle = {
 const currentSubredditStyle = {
 	letterSpacing: '1px',
 	marginBottom: '5px',
-	fontSize: '25px'
-
+	fontSize: '25px',
 }
