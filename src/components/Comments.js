@@ -10,7 +10,6 @@ class Comments extends Component {
 	}
 	handleMoreComments(comment, i) {
 		this.setState({
-			...this.state,
 			[i]: <Comments comments={comment.replies.data.children} />
 		});
 	}
