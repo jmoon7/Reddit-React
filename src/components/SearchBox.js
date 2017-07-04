@@ -16,9 +16,11 @@ class SearchBox extends Component {
 	fetchSearchSuggestions() {
 		let fetchURL = `https://www.reddit.com/subreddits/search/.json?q=${this.state.query}?`
 		fetchFromReddit('searchSuggestions', fetchURL).then(response => {
-			this.setState({
-				searchSuggestions: response
-			});
+			if (this.state.query !== '') {
+				this.setState({
+					searchSuggestions: response
+				});
+			}
 		});
 	}
 
@@ -35,20 +37,17 @@ class SearchBox extends Component {
 	}
 	
 	handleKeyPress(event) {
-		if (event.key === 'Enter') {
-			if (this.state.query !== '') {
-				this.props.handleSubmit(this.state.query);
-				this.setState({ 
-					query: '',
-					searchSuggestions: []
-				});
-			}
+		if (event.key === 'Enter' && this.state.query !== '') {
+			this.props.handleSubmit(this.state.query);
+			this.setState({ 
+				query: '',
+				searchSuggestions: []
+			});
 		}
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (this.state.query !== prevState.query) {
-			console.log(this.state.query);
 			this.fetchSearchSuggestions();
 		}
 	}

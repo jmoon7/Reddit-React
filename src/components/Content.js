@@ -1,22 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { decodeHTML, roundToThousand } from '../utils';
+import { decodeHTML, roundToThousand, getDimensions } from '../utils';
 import showdown from 'showdown';
 
 const Content = (props) => {
 	const {post, handleBackClick} = props;
 	let media;
+	// ?
+	let width = getDimensions()[0].toString();
 	try {
-		// TODO: youtube videos?
-		if (post.preview) {
-			let src = post.preview.images[0];
-			// check if src is an empty object, i.e. {}
-			if (Object.keys(src.variants).length !== 0) {
-				src = src.variants.gif.source.url;
-				media = <iframe src={src} style={iframeStyle} title="media" scrolling="no"></iframe>
-			} else {
-				src = decodeHTML(src.source.url);
-				media = <img style={imgStyle} src={src} alt='media'/>;
+		// youtube videos
+		if (post.media && post.media.type === 'youtube.com') {
+			let src = 'https://www.youtube.com/embed/' + post.url.slice("https://youtu.be/".length, post.url.length);
+			media = <iframe src={src} allowFullScreen frameBorder='0'/>
+		} else {
+			if (post.preview) {
+				let src = post.preview.images[0];
+				// check if src is an empty object, i.e. {}
+				if (Object.keys(src.variants).length !== 0) {
+					src = src.variants.gif.source.url;
+					// ?
+					media = <iframe src={src} style={iframeStyle} title="media" scrolling="no" width='100%' height='100%'/>
+				} else {
+					src = decodeHTML(src.source.url);
+					media = <img style={imgStyle} src={src} alt='media'/>;
+				}
 			}
 		}
 	} catch (e) {
@@ -62,8 +70,6 @@ const imgStyle = {
 const iframeStyle = {
 	margin: '0',
 	padding: '0',
-	height: '500px',
-	width: '500px',
     border: 'none'
 }
 

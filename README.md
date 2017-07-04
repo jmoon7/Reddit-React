@@ -12,7 +12,7 @@
     App
         Main
             Header
-            Title
+                Title
             Subreddits
                 SearchBox
             PostView
@@ -28,17 +28,15 @@ Features:
 
     - Display full comments tree
     - More posts (infinite scrolling / next button)
-    - Support Youtube videos
     - Login/Signup?
-    - Show Loading...
     - -> Redux -> React native?
 
 Bugs:
 
+    - scrolling on desktop view
     - subreddit suggestions broken on mobile
     - zooming broken
     - Scaling iframe in the Content container
     - Gilded sign at the end of the comment section
-    - Search suggestions buggy if query change is faster than fetch time
     - setState warnings
     - fix error handling

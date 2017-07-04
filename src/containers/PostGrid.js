@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Block from '../components/Block';
+import Block from './Block';
 import '../scrollbar.css'
 
 class PostGrid extends Component {

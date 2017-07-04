@@ -54,10 +54,6 @@ export const fetchFromReddit = (type, path) => {
 					return subreddits;
 				case 'comments':
 					let comments = response[1].data.children;
-					comments = comments.map(comment => {
-						// TODO: replies? children comments?
-						return comment.data;
-					});
 					return comments;
 				default:
 					console.log('fetchFromReddit: case not handled');
@@ -70,4 +66,4 @@ export const fetchFromReddit = (type, path) => {
 			console.log('fetchFromReddit: network error');
 			console.log(error)
 		})
-}	
+}
