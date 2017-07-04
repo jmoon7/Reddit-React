@@ -4,6 +4,7 @@ import Comments from '../components/Comments';
 import Content from '../components/Content';
 import { fetchFromReddit } from '../utils';
 import '../transition.css'
+import '../scrollbar.css'
 
 class PostView extends Component {
 
@@ -53,10 +54,10 @@ class PostView extends Component {
 
 		return (
 			<div style={divStyle}>
-				<div style={contentStyle}>
+				<div style={contentStyle} className='scrollbar'>
 					<Content post={post} handleBackClick={handleBackClick}/>
 				</div>
-				<div style={commentsStyle}>
+				<div style={commentsStyle} className='scrollbar'>
 					<Comments comments={this.state.comments}/>
 				</div>			
 			</div>

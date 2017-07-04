@@ -31,6 +31,7 @@ Features:
     - Support Youtube videos
     - Login/Signup?
     - Show Loading...
+    - -> Redux -> React native?
 
 Bugs:
 

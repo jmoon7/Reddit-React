@@ -85,8 +85,8 @@ class Main extends Component {
 	
 	render() {
 		let device = this.state.device;
-		const headerStyle = (device !== 'mobile') ? { height: '22%'} : { height: '18%'};
-		postStyle = (device !== 'mobile') ? { ...postStyle, height: '78%'} : { ...postStyle, height: '82%'};
+		const headerStyle = (device !== 'mobile') ? { height: '27%'} : { height: '18.5%'};
+		postStyle = (device !== 'mobile') ? { ...postStyle, height: '73%'} : { ...postStyle, height: '81.5%'};
 
 		const posts = this.state.posts.slice(0, this.state.numPosts);
 

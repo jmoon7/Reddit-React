@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Block from '../components/Block';
+import '../scrollbar.css'
 
 class PostGrid extends Component {
 
@@ -11,7 +12,7 @@ class PostGrid extends Component {
 			return <Block key={i} post={post} nsfw={nsfw} handleClick={this.props.handleClick} device={device}/>
 		});
 		
-		return <div style={gridStyle}> { posts } </div>;
+		return <div style={gridStyle} className='scrollbar'> { posts } </div>;
 	}
 }
 

@@ -23,14 +23,15 @@ class Subreddits extends Component {
 				</button>
 			);
 		});
-		
+		let br;		
 		if (this.props.device === 'mobile') {
 			subreddits = [];
+			br = <br/>
 		}
-		console.log(this.props.currentSubreddit)
+
 		return (
 			<div style={divStyle}> 
-				<br/>
+				{br}
 				<div style={currentSubredditStyle}>
 					{ `/r/${this.props.currentSubreddit}` } 
 				</div>
