@@ -1,18 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { decodeHTML, roundToThousand, getDimensions } from '../utils';
+import { decodeHTML, roundToThousand, /*getDimensions*/ } from '../utils';
 import showdown from 'showdown';
+
+const propTypes = {
+	post: PropTypes.object.isRequired,
+	handleBackClick: PropTypes.func.isRequired
+};
 
 const Content = (props) => {
 	const {post, handleBackClick} = props;
 	let media;
 	// ?
-	let width = getDimensions()[0].toString();
+	// let width = getDimensions()[0].toString();
 	try {
-		// youtube videos
+		// youtube videos, TODO: other media e.g. streamable
 		if (post.media && post.media.type === 'youtube.com') {
 			let src = 'https://www.youtube.com/embed/' + post.url.slice("https://youtu.be/".length, post.url.length);
-			media = <iframe src={src} allowFullScreen frameBorder='0'/>
+			media = <iframe title='youtube' src={src} allowFullScreen frameBorder='0'/>
 		} else {
 			if (post.preview) {
 				let src = post.preview.images[0];
@@ -20,7 +25,7 @@ const Content = (props) => {
 				if (Object.keys(src.variants).length !== 0) {
 					src = src.variants.gif.source.url;
 					// ?
-					media = <iframe src={src} style={iframeStyle} title="media" scrolling="no" width='100%' height='100%'/>
+					media = <iframe title='media' src={src} style={iframeStyle} scrolling="no" width='100%' height='100%'/>
 				} else {
 					src = decodeHTML(src.source.url);
 					media = <img style={imgStyle} src={src} alt='media'/>;
@@ -52,13 +57,6 @@ const Content = (props) => {
 		</div>
 	);	
 }
-
-Content.propTypes = {
-	post: PropTypes.object.isRequired,
-	handleBackClick: PropTypes.func.isRequired
-};
-
-export default Content
 
 const imgStyle = {
 	height: 'auto', 
@@ -120,3 +118,6 @@ const bodyStyle = {
 	margin: '20px'
 }
 
+Content.propTypes = propTypes;
+
+export default Content;

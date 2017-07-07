@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import Title from './Title'
 import github from '../resources/github.png';
 
+const propTypes = {
+	device: PropTypes.string.isRequired,
+	handleNsfwClick: PropTypes.func.isRequired,
+	nsfw: PropTypes.bool.isRequired
+};
 
 class Header extends Component {
 	
@@ -15,7 +20,7 @@ class Header extends Component {
 	}
 
 	nsfwClick() {
-		this.props.handleNSFWClick();
+		this.props.handleNsfwClick();
 	}
 
 	render() {
@@ -29,23 +34,14 @@ class Header extends Component {
 		return (
 			<div>
 				<a href="https://github.com/jmoon7/Reddit-React" style={linkStyle}> 
-					<img src={github} alt='GITHUB' height='20' /> 
+					<img src={github} alt="github" height="20" /> 
 				</a>
-				<button style={ nsfwStyle } onClick={ this.nsfwClick.bind(this) } > 18+ </button>
-				<Title device={ this.props.device } />
-
+				<button style={nsfwStyle} onClick={this.nsfwClick.bind(this)} > 18+ </button>
+				<Title device={this.props.device} />
 			</div>
 		)
 	}
 }
-
-Header.propTypes = {
-	device: PropTypes.string.isRequired,
-	handleNSFWClick: PropTypes.func.isRequired,
-	nsfw: PropTypes.bool.isRequired
-};
-
-export default Header
 
 const linkStyle = {
 	marginLeft: '5px',
@@ -59,6 +55,11 @@ const inputStyle = {
 	cursor: 'pointer',
 	outline: 'none'	
 }
+
+Header.propTypes = propTypes;
+
+export default Header;
+
 
 /*
 <button style={ inputStyle } onClick={ this.loginClick.bind(this) } > LOGIN </button>

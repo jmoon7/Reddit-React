@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import '../transition.css';
 import { fetchFromReddit } from '../utils.js';
 
+const propTypes = {
+	handleSubmit: PropTypes.func.isRequired
+};
+
 class SearchBox extends Component {
 
 	constructor(props) {
@@ -13,15 +17,10 @@ class SearchBox extends Component {
 		}
 	}
 	
-	fetchSearchSuggestions() {
-		let fetchURL = `https://www.reddit.com/subreddits/search/.json?q=${this.state.query}?`
-		fetchFromReddit('searchSuggestions', fetchURL).then(response => {
-			if (this.state.query !== '') {
-				this.setState({
-					searchSuggestions: response
-				});
-			}
-		});
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.query !== prevState.query) {
+			this.fetchSearchSuggestions();
+		}
 	}
 
 	handleChange(event) {
@@ -46,10 +45,15 @@ class SearchBox extends Component {
 		}
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (this.state.query !== prevState.query) {
-			this.fetchSearchSuggestions();
-		}
+	fetchSearchSuggestions() {
+		let fetchURL = `https://www.reddit.com/subreddits/search/.json?q=${this.state.query}?`
+		fetchFromReddit('searchSuggestions', fetchURL).then(response => {
+			if (this.state.query !== '') {
+				this.setState({
+					searchSuggestions: response
+				});
+			}
+		});
 	}
 
 	render() {
@@ -78,12 +82,6 @@ class SearchBox extends Component {
 		);
 	}
 }
-
-SearchBox.propTypes = {
-	handleSubmit: PropTypes.func.isRequired
-};
-
-export default SearchBox
 
 const divStyle = {
 	width: '200px',
@@ -114,3 +112,7 @@ const listStyle = {
 	cursor: 'pointer',
 	border: 'none'
 }
+
+SearchBox.propTypes = propTypes;
+
+export default SearchBox;

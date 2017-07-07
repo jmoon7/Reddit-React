@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { roundToThousand } from '../utils';
 import showdown from 'showdown';
 
+const propTypes = {
+	comments: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
 class Comments extends Component {
 	constructor(props) {
 		super(props);
@@ -35,6 +39,9 @@ class Comments extends Component {
 							</button>
 							{ this.state[i] }
 						</div> 
+			} else {
+				console.log('Comments: no more replies');
+				return null;
 			}
 		});
 		
@@ -45,12 +52,6 @@ class Comments extends Component {
 		);	
 	}
 }
-
-Comments.propTypes = {
-	comments: PropTypes.arrayOf(PropTypes.object).isRequired
-};
-
-export default Comments
 
 const emptyStyle = {
 	fontSize: '40px',
@@ -94,3 +95,7 @@ const commentStyle = {
 		border: 'none',
 		color: 'blue'
 	}
+
+Comments.propTypes = propTypes;
+
+export default Comments;

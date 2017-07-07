@@ -7,6 +7,12 @@ import { fetchFromReddit } from '../utils';
 import '../transition.css'
 import '../scrollbar.css'
 
+const propTypes = {
+	post: PropTypes.object.isRequired,
+	handleBackClick: PropTypes.func.isRequired,
+	device: PropTypes.string.isRequired
+};
+
 class PostView extends Component {
 
 	constructor(props) {
@@ -15,6 +21,10 @@ class PostView extends Component {
 			comments: [],
 			isLoading: true
 		}
+	}
+
+	componentDidMount() {
+		this.fetchComments();
 	}
 
 	fetchComments() {
@@ -28,14 +38,10 @@ class PostView extends Component {
 		});
 	}
 
-	componentDidMount() {
-		this.fetchComments();
-	}
-
 	render() {
 		const { post, handleBackClick, device } = this.props;
 		
-		if (device === 'mobile') {
+		if (device === 'small') {
 			divStyle = { ...divStyle, overflowY: 'auto', height: '100%', width: '100%' };
 			contentStyle = { ...contentStyle, display: 'block', width: '100%', height: 'auto' };
 			commentsStyle = { ...commentsStyle, display: 'block', width: '100%', height: 'auto'};
@@ -67,14 +73,6 @@ class PostView extends Component {
 	}
 }
 
-PostView.propTypes = {
-	post: PropTypes.object.isRequired,
-	handleBackClick: PropTypes.func.isRequired,
-	device: PropTypes.string.isRequired
-};
-
-export default PostView
-
 let divStyle = {
 	display: 'inline-block',
 	border: '2px solid #dddddd',
@@ -92,5 +90,10 @@ let commentsStyle = {
 	overflowX: 'hidden',
 	textAlign: 'left',
 }
+
+PostView.propTypes = propTypes;
+
+export default PostView;
+
 
 

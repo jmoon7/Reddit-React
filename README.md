@@ -1,7 +1,7 @@
 
 # Reddit React
 
-[See it in action](http://reddit-react.s3-website-us-west-2.amazonaws.com/).
+[See it in action](http://jungwoomoon.com/reddit-react/).
 
 > This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 

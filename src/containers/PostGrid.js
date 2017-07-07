@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 import Block from './Block';
 import '../scrollbar.css'
 
+const propTypes = {
+	posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+	handleClick: PropTypes.func.isRequired,
+	nsfw: PropTypes.bool.isRequired,
+	device: PropTypes.string.isRequired
+};
+
 class PostGrid extends Component {
 
 	render() {
-		let { posts, nsfw, device } = this.props;
-
+		let { display, posts, nsfw, device } = this.props;
+		gridStyle = display ? { ...gridStyle, display: 'block' } : { ...gridStyle, display: 'none'};
 		posts = posts.map((post, i) => {
 			return <Block key={i} post={post} nsfw={nsfw} handleClick={this.props.handleClick} device={device}/>
 		});
@@ -16,16 +23,12 @@ class PostGrid extends Component {
 	}
 }
 
-PostGrid.propTypes = {
-	posts: PropTypes.arrayOf(PropTypes.object).isRequired,
-	handleClick: PropTypes.func.isRequired,
-	nsfw: PropTypes.bool.isRequired,
-	device: PropTypes.string.isRequired
+let gridStyle = {
+	overflowY: 'auto',
+	height: '100%',
+	display: 'none'
 };
 
-export default PostGrid
+PostGrid.propTypes = propTypes;
 
-const gridStyle = {
-	overflowY: 'auto',
-	height: '100%'
-}
+export default PostGrid;

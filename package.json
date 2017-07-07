@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "reddit-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,6 +8,8 @@
     "showdown": "^1.7.1"
   },
   "devDependencies": {
+    "eslint": "^4.1.1",
+    "eslint-plugin-react": "^7.1.0",
     "react-scripts": "1.0.7"
   },
   "scripts": {
@@ -15,5 +17,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+   "homepage" : "http://jungwoomoon.com/reddit-react"
 }

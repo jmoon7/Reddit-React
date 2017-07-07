@@ -4,6 +4,13 @@ import BlockImage from '../components/BlockImage';
 import '../transition.css';
 import { decodeHTML } from '../utils';
 
+const propTypes = {
+	post: PropTypes.object.isRequired,
+	nsfw: PropTypes.bool.isRequired,
+	handleClick: PropTypes.func.isRequired,
+	device: PropTypes.string.isRequired
+};
+
 class Block extends Component {
 	constructor(props) {
 		super(props);
@@ -13,6 +20,26 @@ class Block extends Component {
 			hover: false,
 			noImg: false
 		};
+	}
+
+	componentWillMount() {
+		this.setImageURL();
+	}
+	
+	componentDidMount() {
+		var img = new window.Image();
+		img.onload = () => { 
+			this.setState({ imgLoaded: true }) 
+		};
+		img.src = this.state.url;
+	}
+
+	handleMouseOver() {
+		this.setState({ hover: true });
+	}
+
+	handleMouseOut() {
+		this.setState({ hover: false });
 	}
 
 	setImageURL() {
@@ -35,32 +62,12 @@ class Block extends Component {
 		return title
 	}
 
-	handleMouseOver() {
-		this.setState({ hover: true });
-	}
-
-	handleMouseOut() {
-		this.setState({ hover: false });
-	}
-
-	componentWillMount() {
-		this.setImageURL();
-	}
-	
-	componentDidMount() {
-		var img = new window.Image();
-		img.onload = () => { 
-			this.setState({ imgLoaded: true }) 
-		};
-		img.src = this.state.url;
-	}
-
 	render() {
 		const { post, nsfw, device } = this.props;
 
-		let width = (device === 'mobile') ? '100%' : '200px';
-		let height = (device === 'mobile') ? '200px' : '100px';
-		let margin = (device === 'mobile') ? '0' : '5px';
+		let width = (device === 'small') ? '100%' : '200px';
+		let height = (device === 'small') ? '200px' : '100px';
+		let margin = (device === 'small') ? '0' : '5px';
 		spanStyle = { ...spanStyle, width: width, height: height, margin: margin};
 
 		let imageLoad = 'imageLoading';
@@ -71,7 +78,7 @@ class Block extends Component {
 			<span style={spanStyle} 
 				onMouseOver={this.handleMouseOver.bind(this)} 
 				onMouseOut={this.handleMouseOut.bind(this)} 
-				onClick={() => this.props.handleClick(post)} >
+				onClick={() => this.props.handleClick(post)}>
 
 				<BlockImage
 					src={this.state.url}
@@ -90,15 +97,6 @@ class Block extends Component {
 	}
 }
 
-Block.propTypes = {
-	post: PropTypes.object.isRequired,
-	nsfw: PropTypes.bool.isRequired,
-	handleClick: PropTypes.func.isRequired,
-	device: PropTypes.string.isRequired
-};
-
-export default Block
-
 let spanStyle = {
 	position: 'relative',
 	display: 'inline-block',
@@ -107,3 +105,7 @@ let spanStyle = {
 	borderStyle: 'none',
 	cursor: 'pointer'
 };
+
+Block.propTypes = propTypes;
+
+export default Block;

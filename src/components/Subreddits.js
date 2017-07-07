@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import SearchBox from './SearchBox';
 import '../transition.css'
 
+const propTypes = {
+	currentSubreddit: PropTypes.string.isRequired,
+	handleClick: PropTypes.func.isRequired,
+	device: PropTypes.string.isRequired
+};
+
 class Subreddits extends Component {
 
 	constructor(props) {
@@ -23,8 +29,9 @@ class Subreddits extends Component {
 				</button>
 			);
 		});
+
 		let br;		
-		if (this.props.device === 'mobile') {
+		if (this.props.device === 'small') {
 			subreddits = [];
 			br = <br/>
 		}
@@ -35,21 +42,12 @@ class Subreddits extends Component {
 				<div style={currentSubredditStyle}>
 					{ `/r/${this.props.currentSubreddit}` } 
 				</div>
-				<SearchBox handleSubmit={this.props.handleClick} />
+				<SearchBox handleSubmit={this.props.handleClick}/>
 				{ subreddits }
 			</div>
 		)
 	}
 }
-
-Subreddits.propTypes = {
-	currentSubreddit: PropTypes.string.isRequired,
-	handleClick: PropTypes.func.isRequired,
-	device: PropTypes.string.isRequired
-};
-
-export default Subreddits
-
 
 let divStyle = {
 	textAlign: 'center'
@@ -70,3 +68,7 @@ const currentSubredditStyle = {
 	marginBottom: '5px',
 	fontSize: '25px',
 }
+
+Subreddits.propTypes = propTypes;
+
+export default Subreddits;
